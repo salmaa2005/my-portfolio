@@ -1,3 +1,11 @@
+
+/* ============================================================
+   TYPOGRAPHY — BLUSH & BERRY
+   Elegant editorial headings + modern technical readability.
+   ============================================================ */
+
+/* Headings */
+
 h1,
 h2,
 h3,
@@ -6,19 +14,22 @@ h5,
 h6 {
   font-family: var(--font-heading);
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
   color: var(--text);
   margin: 0 0 var(--space-4);
 }
 
 h1 {
-  font-size: clamp(2.25rem, 5vw + 1rem, var(--fs-5xl));
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 5vw + 1rem, var(--fs-5xl));
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 700;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 3vw + 1rem, var(--fs-3xl));
+  font-size: clamp(2rem, 3vw + 1rem, var(--fs-3xl));
+  line-height: 1.15;
 }
 
 h3 {
@@ -29,30 +40,100 @@ h4 {
   font-size: var(--fs-xl);
 }
 
+h5 {
+  font-size: var(--fs-lg);
+}
+
+h6 {
+  font-size: var(--fs-base);
+}
+
+
+/* Body text */
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
 p {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.75;
   margin: 0 0 var(--space-4);
 }
 
 small {
   font-size: var(--fs-sm);
+  line-height: 1.5;
 }
+
+
+/* Technical typography */
 
 code,
 pre,
-kbd {
+kbd,
+samp {
   font-family: var(--font-mono);
   font-size: 0.9em;
 }
 
+pre {
+  line-height: 1.65;
+}
+
+
+/* Eyebrow labels */
+
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   font-weight: 500;
+  line-height: 1.6;
 }
+
+
+/* Special heading accent */
+
+.heading-accent {
+  color: var(--accent);
+}
+
+
+/* Body text utilities */
 
 .text-muted {
   color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+
+/* Links */
+
+a {
+  color: var(--accent-hover);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+
+/* Selection */
+
+::selection {
+  background: var(--color-rose-pink);
+  color: #FFFFFF;
 }
