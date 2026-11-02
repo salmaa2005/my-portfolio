@@ -5,7 +5,7 @@ import {
   GraduationCap,
   MapPin,
   Phone,
-  ExternalLink,
+  ExternalLink, // <-- Add this
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
@@ -183,19 +183,31 @@ export function About() {
               <h3 className="cert-col-title">Industry Certifications</h3>
               <div className="cert-list">
                 {earnedCertifications.map((c) => (
-                  <article key={c.name} className="cert-item">
-                    <h4 className="cert-name">{c.name}</h4>
-                    <p className="cert-provider">{c.provider} {c.date && `· ${c.date}`}</p>
+                  <article key={c.name} className="cert-item cert-item-with-image">
+                    <div className="cert-content">
+                      <h4 className="cert-name">{c.name}</h4>
+                      <p className="cert-provider">{c.provider} {c.date && `· ${c.date}`}</p>
+                      
+                      {c.skills && (
+                        <div className="cert-skills">
+                          {c.skills.map(s => <span key={s} className="cert-skill">{s}</span>)}
+                        </div>
+                      )}
+                    </div>
                     
-                    {c.skills && (
-                      <div className="cert-skills">
-                        {c.skills.map(s => <span key={s} className="cert-skill">{s}</span>)}
-                      </div>
-                    )}
-
-                    {c.credentialUrl && (
-                      <a href={c.credentialUrl} target="_blank" rel="noreferrer" className="btn-credential">
-                        Show credential <ExternalLink size={14} />
+                    {/* IMAGE PREVIEW & LINK */}
+                    {c.imageUrl && (
+                      <a 
+                        href={c.credentialUrl || c.imageUrl} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="cert-image-wrapper"
+                        title={c.credentialUrl ? "Open credential in new tab" : "Open image in new tab"}
+                      >
+                        <img src={c.imageUrl} alt={`${c.name} certificate`} className="cert-image" />
+                        <div className="cert-hover-icon">
+                          <ExternalLink size={20} />
+                        </div>
                       </a>
                     )}
                   </article>
@@ -203,18 +215,30 @@ export function About() {
               </div>
             </div>
 
-            {/* 2. Red Hat Academy */}
+            {/* 2. Red Hat / Attendance */}
             <div className="cert-group">
-              <h3 className="cert-col-title">Red Hat Academy</h3>
+              <h3 className="cert-col-title">Course Attendance</h3>
               <div className="cert-list">
                 {courseAttendance.map((c) => (
-                  <article key={c.name} className="cert-item">
-                    <h4 className="cert-name">{c.name}</h4>
-                    <p className="cert-provider">{c.provider} {c.date && `· ${c.date}`}</p>
-                    
-                    {c.credentialUrl && (
-                      <a href={c.credentialUrl} target="_blank" rel="noreferrer" className="btn-credential">
-                        Show credential <ExternalLink size={14} />
+                  <article key={c.name} className="cert-item cert-item-with-image">
+                    <div className="cert-content">
+                      <h4 className="cert-name">{c.name}</h4>
+                      <p className="cert-provider">{c.provider} {c.date && `· ${c.date}`}</p>
+                    </div>
+
+                    {/* IMAGE PREVIEW & LINK */}
+                    {c.imageUrl && (
+                      <a 
+                        href={c.credentialUrl || c.imageUrl} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="cert-image-wrapper"
+                        title={c.credentialUrl ? "Open credential in new tab" : "Open image in new tab"}
+                      >
+                        <img src={c.imageUrl} alt={`${c.name} certificate`} className="cert-image" />
+                        <div className="cert-hover-icon">
+                          <ExternalLink size={20} />
+                        </div>
                       </a>
                     )}
                   </article>
@@ -227,14 +251,32 @@ export function About() {
               <h3 className="cert-col-title">Intensive Training Programs</h3>
               <div className="cert-list">
                 {trainingPrograms.map((c) => (
-                  <article key={c.name} className="cert-item">
-                    <h4 className="cert-name">{c.name}</h4>
-                    <p className="cert-provider">
-                      {c.provider}
-                      {c.date ? ` · ${c.date}` : ""}
-                    </p>
-                    {c.description && (
-                      <p className="cert-desc">{c.description}</p>
+                  <article key={c.name} className="cert-item cert-item-with-image">
+                    <div className="cert-content">
+                      <h4 className="cert-name">{c.name}</h4>
+                      <p className="cert-provider">
+                        {c.provider}
+                        {c.date ? ` · ${c.date}` : ""}
+                      </p>
+                      {c.description && (
+                        <p className="cert-desc">{c.description}</p>
+                      )}
+                    </div>
+
+                    {/* IMAGE PREVIEW & LINK (If it exists) */}
+                    {c.imageUrl && (
+                      <a 
+                        href={c.imageUrl} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="cert-image-wrapper"
+                        title="Open image in new tab"
+                      >
+                        <img src={c.imageUrl} alt={`${c.name} certificate`} className="cert-image" />
+                        <div className="cert-hover-icon">
+                          <ExternalLink size={20} />
+                        </div>
+                      </a>
                     )}
                   </article>
                 ))}
