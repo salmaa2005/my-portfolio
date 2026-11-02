@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Mail, GraduationCap } from "lucide-react";
+import {
+  ArrowUpRight,
+  Mail,
+  GraduationCap,
+  MapPin,
+  Phone,
+  ExternalLink,
+} from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 import { profile } from "../data/profile";
@@ -8,6 +15,7 @@ import { timeline } from "../data/timeline";
 import { education } from "../data/education";
 import {
   earnedCertifications,
+  courseAttendance,
   trainingPrograms,
   currentlyStudying,
 } from "../data/certifications";
@@ -44,15 +52,16 @@ export function About() {
                 <span className="tick" aria-hidden="true" />
                 <div>
                   <strong>{profile.title}</strong>
-                  Building toward reliable systems, one lab at a time.
+                  Software Engineering graduate building toward reliable
+                  systems, one lab at a time.
                 </div>
               </li>
               <li>
                 <span className="tick" aria-hidden="true" />
                 <div>
                   <strong>Currently focused on</strong>
-                  Red Hat System Administration, networking fundamentals, and
-                  infrastructure automation.
+                  Red Hat System Administration, Ansible automation, Kubernetes
+                  &amp; OpenShift, and Infrastructure as Code.
                 </div>
               </li>
               <li>
@@ -118,14 +127,7 @@ export function About() {
                   />
                   {edu.institution}
                 </h3>
-                <span
-                  className={
-                    "edu-status" +
-                    (edu.status === "in-progress" ? " is-current" : "")
-                  }
-                >
-                  {edu.status === "in-progress" ? "In progress" : "Graduated"}
-                </span>
+                <span className="edu-status">Graduated</span>
               </div>
 
               <dl className="edu-grid">
@@ -133,18 +135,23 @@ export function About() {
                   <dt>Faculty</dt>
                   <dd>{edu.faculty}</dd>
                 </div>
+
                 <div className="edu-field">
                   <dt>Degree</dt>
                   <dd>{edu.degree}</dd>
                 </div>
+
                 <div className="edu-field">
                   <dt>Period</dt>
                   <dd>{edu.period}</dd>
                 </div>
+
                 {edu.gpa && (
                   <div className="edu-field">
                     <dt>GPA</dt>
-                    <dd>{edu.gpa}</dd>
+                    <dd>
+                      {edu.gpa} (Excellent)
+                    </dd>
                   </div>
                 )}
               </dl>
@@ -166,19 +173,79 @@ export function About() {
         <div className="container">
           <SectionHeading
             eyebrow="Certifications & training"
-            title="Programs and progress"
+            title="Credentials and progress"
           />
 
-          <div className="cert-grid">
-            <div>
-              <h3 className="cert-col-title">Earned certifications</h3>
-              {earnedCertifications.length === 0 ? (
-                <p className="cert-empty">
-                  None listed yet — this section is intentionally empty until a
-                  certification is genuinely earned.
-                </p>
-              ) : (
-                earnedCertifications.map((c) => (
+          <div className="cert-stack">
+            
+            {/* 1. Industry Certifications */}
+            <div className="cert-group">
+              <h3 className="cert-col-title">Industry Certifications</h3>
+              <div className="cert-list">
+                {earnedCertifications.map((c) => (
+                  <article key={c.name} className="cert-item">
+                    <h4 className="cert-name">{c.name}</h4>
+                    <p className="cert-provider">{c.provider} {c.date && `· ${c.date}`}</p>
+                    
+                    {c.skills && (
+                      <div className="cert-skills">
+                        {c.skills.map(s => <span key={s} className="cert-skill">{s}</span>)}
+                      </div>
+                    )}
+
+                    {c.credentialUrl && (
+                      <a href={c.credentialUrl} target="_blank" rel="noreferrer" className="btn-credential">
+                        Show credential <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            {/* 2. Red Hat Academy */}
+            <div className="cert-group">
+              <h3 className="cert-col-title">Red Hat Academy</h3>
+              <div className="cert-list">
+                {courseAttendance.map((c) => (
+                  <article key={c.name} className="cert-item">
+                    <h4 className="cert-name">{c.name}</h4>
+                    <p className="cert-provider">{c.provider} {c.date && `· ${c.date}`}</p>
+                    
+                    {c.credentialUrl && (
+                      <a href={c.credentialUrl} target="_blank" rel="noreferrer" className="btn-credential">
+                        Show credential <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. Intensive Training */}
+            <div className="cert-group">
+              <h3 className="cert-col-title">Intensive Training Programs</h3>
+              <div className="cert-list">
+                {trainingPrograms.map((c) => (
+                  <article key={c.name} className="cert-item">
+                    <h4 className="cert-name">{c.name}</h4>
+                    <p className="cert-provider">
+                      {c.provider}
+                      {c.date ? ` · ${c.date}` : ""}
+                    </p>
+                    {c.description && (
+                      <p className="cert-desc">{c.description}</p>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            {/* 4. Currently Studying */}
+            <div className="cert-group">
+              <h3 className="cert-col-title">Currently Studying</h3>
+              <div className="cert-list">
+                {currentlyStudying.map((c) => (
                   <article key={c.name} className="cert-item">
                     <h4 className="cert-name">{c.name}</h4>
                     <p className="cert-provider">{c.provider}</p>
@@ -186,42 +253,10 @@ export function About() {
                       <p className="cert-desc">{c.description}</p>
                     )}
                   </article>
-                ))
-              )}
+                ))}
+              </div>
             </div>
 
-            <div>
-              <h3 className="cert-col-title">Training programs</h3>
-              {trainingPrograms.length === 0 ? (
-                <p className="cert-empty">
-                  Training programs are listed separately from certifications,
-                  so nothing is overstated.
-                </p>
-              ) : (
-                trainingPrograms.map((c) => (
-                  <article key={c.name} className="cert-item">
-                    <h4 className="cert-name">{c.name}</h4>
-                    <p className="cert-provider">{c.provider}</p>
-                    {c.description && (
-                      <p className="cert-desc">{c.description}</p>
-                    )}
-                  </article>
-                ))
-              )}
-            </div>
-
-            <div>
-              <h3 className="cert-col-title">Currently studying</h3>
-              {currentlyStudying.map((c) => (
-                <article key={c.name} className="cert-item">
-                  <h4 className="cert-name">{c.name}</h4>
-                  <p className="cert-provider">{c.provider}</p>
-                  {c.description && (
-                    <p className="cert-desc">{c.description}</p>
-                  )}
-                </article>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -252,7 +287,7 @@ export function About() {
         <div className="container">
           <SectionHeading
             eyebrow="Skills & technologies"
-            title="What I use and what I'm learning"
+            title="What I work with"
           />
 
           <div className="skills-grid">
@@ -282,7 +317,7 @@ export function About() {
                 style={{ background: "var(--accent)" }}
                 aria-hidden="true"
               />
-              Practicing (used in labs & projects)
+              Practicing (used in labs &amp; projects)
             </span>
             <span>
               <span
@@ -323,56 +358,34 @@ export function About() {
               <ArrowUpRight className="account-arrow" size={16} />
             </a>
 
-            {profile.linkedin ? (
-              <a
-                href={profile.linkedin}
-                className="account-card"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <span className="account-icon">
-                  <FaLinkedin size={18} />
-                </span>
-                <span className="account-body">
-                  <p className="account-label">LinkedIn</p>
-                  <p className="account-handle">Connect professionally</p>
-                </span>
-                <ArrowUpRight className="account-arrow" size={16} />
-              </a>
-            ) : (
-              <div className="account-card" aria-disabled="true">
-                <span className="account-icon">
-                  <FaLinkedin size={18} />
-                </span>
-                <span className="account-body">
-                  <p className="account-label">LinkedIn</p>
-                  <p className="account-handle">URL not yet added</p>
-                </span>
-              </div>
-            )}
+            <a
+              href={profile.linkedin}
+              className="account-card"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <span className="account-icon">
+                <FaLinkedin size={18} />
+              </span>
+              <span className="account-body">
+                <p className="account-label">LinkedIn</p>
+                <p className="account-handle">
+                  linkedin.com/in/{profile.linkedin.split("/in/").pop()}
+                </p>
+              </span>
+              <ArrowUpRight className="account-arrow" size={16} />
+            </a>
 
-            {profile.email ? (
-              <a href={`mailto:${profile.email}`} className="account-card">
-                <span className="account-icon">
-                  <Mail size={18} />
-                </span>
-                <span className="account-body">
-                  <p className="account-label">Email</p>
-                  <p className="account-handle">{profile.email}</p>
-                </span>
-                <ArrowUpRight className="account-arrow" size={16} />
-              </a>
-            ) : (
-              <div className="account-card" aria-disabled="true">
-                <span className="account-icon">
-                  <Mail size={18} />
-                </span>
-                <span className="account-body">
-                  <p className="account-label">Email</p>
-                  <p className="account-handle">Address not yet added</p>
-                </span>
-              </div>
-            )}
+            <a href={`mailto:${profile.email}`} className="account-card">
+              <span className="account-icon">
+                <Mail size={18} />
+              </span>
+              <span className="account-body">
+                <p className="account-label">Email</p>
+                <p className="account-handle">{profile.email}</p>
+              </span>
+              <ArrowUpRight className="account-arrow" size={16} />
+            </a>
 
             <Link to="/articles" className="account-card">
               <span className="account-icon">
@@ -385,11 +398,6 @@ export function About() {
               <ArrowUpRight className="account-arrow" size={16} />
             </Link>
           </div>
-
-          <p className="accounts-note">
-            Some links (LinkedIn, email) are hidden until a real URL is added
-            to <code>src/data/profile.ts</code>.
-          </p>
         </div>
       </section>
     </>

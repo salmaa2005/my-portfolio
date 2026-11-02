@@ -6,23 +6,23 @@ export interface LearningItem {
 
 export const currentlyLearning: LearningItem[] = [
   {
-    title: "Red Hat System Administration (RH124 / RH134)",
-    note: "Working through the official RHEL curriculum.",
+    title: "Red Hat System Administration (RHCSA)",
+    note: "Working through RH124 / RH134 — Linux administration in practice.",
     tag: "Linux",
   },
   {
-    title: "Linux storage & permissions",
-    note: "LVM, ACLs, and SELinux in practice.",
-    tag: "Linux",
+    title: "Ansible Automation (RH294)",
+    note: "Playbook-driven configuration management and repeatable workflows.",
+    tag: "Automation",
   },
   {
-    title: "Networking fundamentals",
-    note: "TCP/IP, subnetting, and packet flow.",
-    tag: "Networking",
-  },
-  {
-    title: "Infrastructure automation",
-    note: "Ansible playbooks and Terraform modules.",
+    title: "Kubernetes & OpenShift",
+    note: "Container orchestration, Helm releases, and Red Hat OpenShift administration.",
     tag: "DevOps",
+  },
+  {
+    title: "Terraform & CloudFormation",
+    note: "Infrastructure as Code for AWS environments, end-to-end.",
+    tag: "Cloud",
   },
 ];

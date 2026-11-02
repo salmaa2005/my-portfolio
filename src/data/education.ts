@@ -10,15 +10,15 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    institution: "TODO: University name",
-    faculty: "TODO: Faculty / department",
-    degree: "TODO: Degree or specialization",
-    period: "TODO: e.g. 2021 — 2025",
+    institution: "Capital University",
+    faculty: "Faculty of Computers and Artificial Intelligence",
+    degree: "B.Sc. in Software Engineering",
+    period: "2022 — JUNE 2026",
     status: "in-progress",
-    gpa: undefined,
+    gpa: "3.71 / 4.00",
     highlights: [
-      "TODO: relevant academic achievement or course",
-      "TODO: relevant academic achievement or course",
+      "Relevant coursework: Operating Systems, Computer Networks, Databases, Software Engineering, System Analysis, Object-Oriented Programming, Algorithms and Data Structures.",
+      "GPA 3.71 / 4.00 in a Software Engineering specialization.",
     ],
   },
 ];

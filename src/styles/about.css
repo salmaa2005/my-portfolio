@@ -1,8 +1,3 @@
-/* ============================================================
-   ABOUT PAGE
-   ============================================================ */
-
-/* ── Shared section spacing ───────────────────────────────── */
 .about-section {
   padding-block: var(--space-8);
   border-bottom: 1px solid var(--border);
@@ -89,6 +84,35 @@
   background: var(--accent);
   margin-top: 0.55rem;
 }
+.cert-sub-group {
+  margin-bottom: var(--space-4);
+}
+
+.cert-sub-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin: 0 0 var(--space-3);
+  font-weight: 600;
+}
+
+.cert-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.cert-skill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+}
 
 @media (min-width: 900px) {
   .journey-grid {
@@ -102,6 +126,7 @@
   position: relative;
   margin: var(--space-7) 0 0;
   padding-left: var(--space-6);
+  list-style: none;
 }
 .timeline::before {
   content: "";
@@ -260,13 +285,106 @@
 }
 
 /* ── Certifications ───────────────────────────────────────── */
-.cert-grid {
-  display: grid;
-  gap: var(--space-6);
+/* ── Certifications (Stacked Layout) ──────────────────────── */
+.cert-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
   margin-top: var(--space-6);
 }
+
+.cert-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cert-col-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin: 0;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.cert-list {
+  display: grid;
+  gap: var(--space-4);
+  /* Optional: If you want them in a grid on desktop, uncomment the next line */
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+}
+
+.cert-item {
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+}
+
+.cert-name {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin: 0 0 var(--space-1);
+  color: var(--text);
+}
+
+.cert-provider {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-3);
+}
+
+.cert-desc {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.cert-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.cert-skill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+}
+
+/* The "Show Credential" Button */
+.btn-credential {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  text-decoration: none;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.btn-credential:hover {
+  background: var(--bg-subtle);
+  border-color: var(--text);
+  color: var(--text);
+}
 @media (min-width: 900px) {
-  .cert-grid { grid-template-columns: repeat(3, 1fr); align-items: start; }
+  .cert-grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
 }
 
 .cert-col-title {
@@ -323,7 +441,7 @@
   background: transparent;
 }
 
-/* ── Technical interests (pillars recap) ──────────────────── */
+/* ── Technical interests ──────────────────────────────────── */
 .interests-grid {
   display: grid;
   gap: var(--space-4);
@@ -488,16 +606,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0;
 }
 
 .account-arrow {
   color: var(--text-muted);
   flex-shrink: 0;
-}
-
-.accounts-note {
-  margin-top: var(--space-4);
-  font-size: var(--fs-sm);
-  color: var(--text-muted);
-  font-style: italic;
 }
