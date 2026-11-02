@@ -3,8 +3,6 @@ import {
   ArrowUpRight,
   Mail,
   GraduationCap,
-  MapPin,
-  Phone,
   ExternalLink, // <-- Add this
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
